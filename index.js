@@ -12,4 +12,6 @@ app.get("/", (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(3000, () => console.log(`Connected to port ${port}`));
+const server = app.listen(port, () => console.log(`Connected to port ${port}`));
+
+module.exports = server;
