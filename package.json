@@ -11,9 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.10.6",
     "supertest": "^4.0.2"
   },
   "devDependencies": {
     "jest": "^26.4.2"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
   }
 }
