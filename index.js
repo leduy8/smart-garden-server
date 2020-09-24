@@ -1,15 +1,14 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const dht = require("./routes/dhtSensors");
-const soil = require("./routes/soilSensors");
+const sensor = require("./routes/sensors");
 
 app.use(express.json());
-app.use("/api/dht", dht);
-app.use("/api/soil", soil);
+app.use("/api/sensor", sensor);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  const parsed = JSON.parse('{"testPassed": true}');
+  res.send(parsed);
 });
 
 mongoose.connect(

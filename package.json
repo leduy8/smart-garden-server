@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "test": "jest --testEnvironment=node --watchAll --verbose --runInBand --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "joi": "^17.2.1",
     "mongoose": "^5.10.6",
     "supertest": "^4.0.2"
   },
