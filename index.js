@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const sensor = require("./routes/sensors");
+const plantStatus = require("./routes/plantStatuses");
 
 app.use(express.json());
 app.use("/api/sensors", sensor);
+app.use("/api/plantStatus", plantStatus);
 
 app.get("/", (req, res) => {
   const parsed = JSON.parse('{"testPassed": true}');

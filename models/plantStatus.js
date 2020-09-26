@@ -1,24 +1,29 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const sensorSchema = new mongoose.Schema({
+const plantStatusSchema = new mongoose.Schema({
   temperature: { type: Number, min: -50, max: 60, required: true },
   airHumidity: { type: Number, min: 0, max: 100, required: true },
   soilMoisture: { type: Number, min: 0, max: 100, required: true },
+  healthStatus: { type: String, required: true },
+  imgURL: { type: String, required: true },
   timestamp: { type: String, required: true },
 });
 
-const Sensor = mongoose.model("sensor", sensorSchema);
+const PlantStatus = mongoose.model("plant status", plantStatusSchema);
 
-function validateSensor(sensor) {
+function validatePlantStatus(plantStatus) {
   const schema = Joi.object({
     temperature: Joi.number().min(-50).max(60).required(),
     airHumidity: Joi.number().min(0).max(100).required(),
     soilMoisture: Joi.number().min(0).max(100).required(),
+    healthStatus: Joi.string().required(),
+    imgURL: Joi.string().required(),
+    timestamp: Joi.string().required(),
   });
 
-  return schema.validate(sensor);
+  return schema.validate(plantStatus);
 }
 
-module.exports.Sensor = Sensor;
-module.exports.validateSensor = validateSensor;
+module.exports.PlantStatus = PlantStatus;
+module.exports.validatePlantStatus = validatePlantStatus;
