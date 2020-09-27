@@ -27,11 +27,13 @@ class Arduino {
 	}
 
 	getSensorsData() {
-		this[_serialCommunication].write("getSensorsData", (err) => {
-			if (err) throw new Error("Error on write: ", err.message);
+		setTimeout(() => {
+			this[_serialCommunication].write("getSensorsData", (err) => {
+				if (err) throw new Error("Error on write: ", err.message);
 
-			console.log("Getting sensors data...");
-		});
+				console.log("Getting sensors data...");
+			});
+		}, 5000);
 
 		this[_parser].on("data", (response) => {
 			console.log(JSON.parse(response));
