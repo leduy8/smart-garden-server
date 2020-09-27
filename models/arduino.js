@@ -35,10 +35,6 @@ class Arduino {
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
-
-		this[_parser].on("data", (response) => {
-			console.log(JSON.parse(response));
-		});
 	}
 
 	pumpWater() {
@@ -50,10 +46,6 @@ class Arduino {
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
-
-		this[_parser].on("data", (response) => {
-			console.log(JSON.parse(response));
-		});
 	}
 }
 
