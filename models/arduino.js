@@ -3,11 +3,9 @@ const Readline = require("@serialport/parser-readline");
 
 const _serialCommunication = Symbol();
 const _parser = Symbol();
-const _dataStreamable = Symbol();
 
 class Arduino {
 	constructor(path, baudRate = 9600) {
-		this[_dataStreamable] = false;
 		this[_parser] = new Readline();
 
 		this[_serialCommunication] = new SerialPort(path, { baudRate });
@@ -22,20 +20,22 @@ class Arduino {
 
 			console.log("Connected to Arduino");
 		});
+
+		this[_parser].on("data", (response) => {
+			const json = JSON.parse(response);
+		});
 	}
 
-	getSensorsData(callback) {
-		setTimeout(() => {
-			this[_serialCommunication].write("getSensorsData", (err) => {
-				if (err) throw new Error("Error on write: ", err.message);
+	getSensorsData() {
+		this[_serialCommunication].write("getSensorsData", (err) => {
+			if (err) throw new Error("Error on write: ", err.message);
 
-				console.log("Getting sensors data...");
-			});
-		}, 5000);
+			console.log("Getting sensors data...");
+		});
 
-		this[_parser].on("data", (sensorsData) =>
-			callback(JSON.parse(sensorsData))
-		);
+		this[_parser].on("data", (response) => {
+			console.log(JSON.parse(response));
+		});
 	}
 
 	pumpWater() {
@@ -46,10 +46,6 @@ class Arduino {
 				console.log("Pumping water...");
 			});
 		}, 5000);
-
-		this[_parser].on("data", (finishedNotification) =>
-			console.log(finishedNotification)
-		);
 	}
 }
 
