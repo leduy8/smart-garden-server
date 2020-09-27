@@ -22,7 +22,7 @@ class Arduino {
 		});
 
 		this[_parser].on("data", (response) => {
-			const json = JSON.parse(response);
+			console.log(JSON.parse(response));
 		});
 	}
 
