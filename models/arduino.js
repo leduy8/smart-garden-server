@@ -32,6 +32,7 @@ class Arduino {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Getting sensors data...");
+				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
 
@@ -46,6 +47,7 @@ class Arduino {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Pumping water...");
+				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
 	}
