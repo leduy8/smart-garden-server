@@ -9,7 +9,7 @@ class Arduino {
 		this[_parser] = new Readline();
 
 		this[_serialCommunication] = new SerialPort(path, { baudRate });
-		this[_serialCommunication].pipe(parser);
+		this[_serialCommunication].pipe(this[_parser]);
 
 		this[_serialCommunication].on("open", (err) => {
 			if (err) throw new Error("No connection to Arduino: ", err.message);
@@ -23,21 +23,25 @@ class Arduino {
 	}
 
 	getSensorsData() {
-		this[_serialCommunication].write("getSensorsData", (err) => {
-			if (err) throw new Error("Error on write: ", err.message);
+		setTimeout(() => {
+			this[_serialCommunication].write("getSensorsData", (err) => {
+				if (err) throw new Error("Error on write: ", err.message);
 
-			console.log("Getting sensors data...");
-		});
+				console.log("Getting sensors data...");
+			});
+		}, 5000);
 
 		this[_parser].on("data", (sensorsData) => JSON.parse(sensorsData));
 	}
 
 	pumpWater() {
-		this[_serialCommunication].write("pumpWater", (err) => {
-			if (err) throw new Error("Error on write: ", err.message);
+		setTimeout(() => {
+			this[_serialCommunication].write("pumpWater", (err) => {
+				if (err) throw new Error("Error on write: ", err.message);
 
-			console.log("Pumping water...");
-		});
+				console.log("Pumping water...");
+			});
+		}, 5000);
 
 		this[_parser].on("data", (finishedNotification) =>
 			console.log(finishedNotification)
