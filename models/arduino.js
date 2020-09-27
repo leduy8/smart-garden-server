@@ -22,7 +22,7 @@ class Arduino {
 		});
 	}
 
-	getSensorsData() {
+	getSensorsData(callback) {
 		setTimeout(() => {
 			this[_serialCommunication].write("getSensorsData", (err) => {
 				if (err) throw new Error("Error on write: ", err.message);
@@ -31,7 +31,9 @@ class Arduino {
 			});
 		}, 5000);
 
-		this[_parser].on("data", (sensorsData) => JSON.parse(sensorsData));
+		this[_parser].on("data", (sensorsData) =>
+			callback(JSON.parse(sensorsData))
+		);
 	}
 
 	pumpWater() {

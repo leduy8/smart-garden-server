@@ -8,7 +8,12 @@ const plantStatus = require("./routes/plantStatuses");
 const { Arduino } = require("./models/arduino");
 const arduino = new Arduino("/dev/ttyACM0");
 
-console.log(arduino.getSensorsData());
+let sensorsData = null;
+
+arduino.getSensorsData((data) => {
+	sensorsData = data;
+	console.log(sensorsData);
+});
 
 app.use(express.json());
 app.use("/api/sensors", sensor);
