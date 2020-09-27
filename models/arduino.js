@@ -20,10 +20,6 @@ class Arduino {
 
 			console.log("Connected to Arduino");
 		});
-
-		this[_parser].on("data", (response) => {
-			console.log(JSON.parse(response));
-		});
 	}
 
 	getSensorsData() {
@@ -35,6 +31,10 @@ class Arduino {
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
+
+		this[_parser].on("data", (response) => {
+			console.log(JSON.parse(response));
+		});
 	}
 
 	pumpWater() {
@@ -46,6 +46,10 @@ class Arduino {
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
+
+		this[_parser].on("data", (response) => {
+			console.log(JSON.parse(response));
+		});
 	}
 }
 
