@@ -32,7 +32,7 @@ class Arduino {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Getting sensors data...");
-				console.log(this[_serialCommunication].read());
+				console.log(this[_serialCommunication].read(100));
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
