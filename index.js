@@ -15,6 +15,8 @@ arduino.getSensorsData((data) => {
 	console.log(sensorsData);
 });
 
+arduino.pumpWater();
+
 app.use(express.json());
 app.use("/api/sensors", sensor);
 app.use("/api/plantStatus", plantStatus);
