@@ -44,3 +44,5 @@ class Arduino {
 		);
 	}
 }
+
+module.exports.Arduino = Arduino;

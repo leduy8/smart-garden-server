@@ -5,7 +5,7 @@ const sensor = require("./routes/sensors");
 const plantStatus = require("./routes/plantStatuses");
 
 // Arduino communication
-const Arduino = require("./models/arduino");
+const { Arduino } = require("./models/arduino");
 const arduino = new Arduino("/dev/ttyACM0");
 
 console.log(arduino.getSensorsData());
