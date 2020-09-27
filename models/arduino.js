@@ -3,9 +3,11 @@ const Readline = require("@serialport/parser-readline");
 
 const _serialCommunication = Symbol();
 const _parser = Symbol();
+const _dataStreamable = Symbol();
 
 class Arduino {
 	constructor(path, baudRate = 9600) {
+		this[_dataStreamable] = false;
 		this[_parser] = new Readline();
 
 		this[_serialCommunication] = new SerialPort(path, { baudRate });
