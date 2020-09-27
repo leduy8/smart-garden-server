@@ -10,12 +10,16 @@ const arduino = new Arduino("/dev/ttyACM0");
 
 let sensorsData = null;
 
-arduino.getSensorsData((data) => {
-	sensorsData = data;
-	console.log(sensorsData);
-});
+setTimeout(() => {
+	arduino.getSensorsData((data) => {
+		sensorsData = data;
+		console.log(sensorsData);
+	});
+}, 5000);
 
-arduino.pumpWater();
+setTimeout(() => {
+	arduino.pumpWater();
+}, 20000);
 
 app.use(express.json());
 app.use("/api/sensors", sensor);
