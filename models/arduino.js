@@ -21,9 +21,9 @@ class Arduino {
 			console.log("Connected to Arduino");
 		});
 
-		// this[_parser].on("data", (response) => {
-		// 	console.log(JSON.parse(response));
-		// });
+		this[_parser].on("data", (response) => {
+			this.currentData = JSON.parse(response);
+		});
 	}
 
 	getSensorsData() {
@@ -32,7 +32,6 @@ class Arduino {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Getting sensors data...");
-				console.log(this[_serialCommunication].read(100));
 				this[_serialCommunication].flush((err, results) => {});
 			});
 		}, 5000);
