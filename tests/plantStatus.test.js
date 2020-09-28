@@ -28,16 +28,14 @@ describe("/api/sensor", () => {
     let timestamp;
 
     const exec = async () => {
-      return await request(server)
-        .post("/api/sensors")
-        .send({
-          temperature,
-          airHumidity,
-          soilMoisture,
-          healthStatus,
-          imgURL,
-          timestamp,
-        });
+      return await request(server).post("/api/sensors").send({
+        temperature,
+        airHumidity,
+        soilMoisture,
+        healthStatus,
+        imgURL,
+        timestamp,
+      });
     };
 
     beforeEach(() => {

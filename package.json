@@ -6,16 +6,18 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --testEnvironment=node --watchAll --verbose --runInBand --detectOpenHandles"
+    "test": "jest --testEnvironment=node --watchAll"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "joi": "^17.2.1",
     "mongoose": "^5.10.6",
     "serialport": "^9.0.1",
+    "socket.io": "^2.3.0",
     "supertest": "^4.0.2"
   },
   "devDependencies": {
