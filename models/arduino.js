@@ -1,6 +1,5 @@
 const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
-const { delete } = require("../routes/sensors");
 
 const _subscribers = Symbol();
 
