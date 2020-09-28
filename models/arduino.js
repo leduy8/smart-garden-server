@@ -1,11 +1,38 @@
 const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
 
+const _subscribers = Symbol();
+
+class Observer {
+	constructor() {
+		this[_subscribers] = [];
+	}
+
+	subscribe(prompt, func) {
+		const index = this[_subscribers].findIndex(
+			(subscriber) => subscriber.prompt === prompt
+		);
+		if (index !== -1) this[_subscribers][index].func = func;
+
+		this[_subscribers].push({ prompt, func });
+	}
+
+	notify(prompt, data) {
+		this[_subscribers].forEach((subscriber) => {
+			if (subscriber.prompt === prompt) {
+				subscriber.func(data);
+			}
+		});
+	}
+}
+
 const _serialCommunication = Symbol();
 const _parser = Symbol();
+const _observer = Symbol();
 
 class Arduino {
 	constructor(path, baudRate = 9600) {
+		this[_observer] = new Observer();
 		this[_parser] = new Readline();
 
 		this[_serialCommunication] = new SerialPort(path, { baudRate });
@@ -22,13 +49,18 @@ class Arduino {
 		});
 
 		this[_parser].on("data", (response) => {
-			this.currentData = JSON.parse(response);
+			const JSONResponse = JSON.parse(response);
+			this[_observer].notify(JSONResponse.prompt, JSONResponse.data);
 		});
 	}
 
-	getSensorsData() {
+	getSensorsData(callback) {
+		const prompt = "getSensorsData";
+
+		this[_observer].subscribe(prompt, callback);
+
 		setTimeout(() => {
-			this[_serialCommunication].write("getSensorsData", (err) => {
+			this[_serialCommunication].write(prompt, (err) => {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Getting sensors data...");
@@ -37,9 +69,13 @@ class Arduino {
 		}, 5000);
 	}
 
-	pumpWater() {
+	pumpWater(callback) {
+		const prompt = "pumpWater";
+
+		this[_observer].subscribe(prompt, callback);
+
 		setTimeout(() => {
-			this[_serialCommunication].write("pumpWater", (err) => {
+			this[_serialCommunication].write(prompt, (err) => {
 				if (err) throw new Error("Error on write: ", err.message);
 
 				console.log("Pumping water...");

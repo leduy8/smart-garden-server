@@ -9,17 +9,21 @@ const { Arduino } = require("./models/arduino");
 const arduino = new Arduino("/dev/ttyACM0");
 
 let sensorsData = null;
-
-arduino.getSensorsData();
+let pumpWaterFinishedNoti = null;
 
 setTimeout(() => {
-	sensorsData = arduino.currentData;
-	console.log(sensorsData);
+	arduino.getSensorsData((responseData) => {
+		sensorsData = responseData;
+		console.log(sensorsData);
+	});
 }, 5000);
 
 setTimeout(() => {
-	arduino.pumpWater();
-}, 5000);
+	arduino.pumpWater((responseData) => {
+		pumpWaterFinishedNoti = responseData;
+		console.log(pumpWaterFinishedNoti);
+	});
+}, 20000);
 
 app.use(express.json());
 app.use("/api/sensors", sensor);
