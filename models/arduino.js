@@ -1,28 +1,24 @@
 const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
+const { delete } = require("../routes/sensors");
 
 const _subscribers = Symbol();
 
 class Observer {
 	constructor() {
-		this[_subscribers] = [];
+		this[_subscribers] = {};
 	}
 
 	subscribe(prompt, func) {
-		const index = this[_subscribers].findIndex(
-			(subscriber) => subscriber.prompt === prompt
-		);
-		if (index !== -1) this[_subscribers][index].func = func;
+		this[_subscribers][prompt] = func;
+	}
 
-		this[_subscribers].push({ prompt, func });
+	unsubscribe(prompt) {
+		delete this[_subscribers][prompt];
 	}
 
 	notify(prompt, data) {
-		this[_subscribers].forEach((subscriber) => {
-			if (subscriber.prompt === prompt) {
-				subscriber.func(data);
-			}
-		});
+		this[_subscribers][prompt](data);
 	}
 }
 
