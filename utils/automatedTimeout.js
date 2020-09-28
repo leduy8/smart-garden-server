@@ -1,4 +1,4 @@
-const autoDelayTime = 0;
+let autoDelayTime = 0;
 
 function setAutomatedTimeout(callback) {
 	setTimeout(callback, autoDelayTime);
