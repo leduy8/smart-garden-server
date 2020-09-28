@@ -6,24 +6,25 @@ const plantStatus = require("./routes/plantStatuses");
 
 // Arduino communication
 const { Arduino } = require("./models/arduino");
+const { setAutomatedTimeout } = require("./utils/automatedTimeout");
 const arduino = new Arduino("/dev/ttyACM0");
 
 let sensorsData = null;
 let pumpWaterFinishedNoti = null;
 
-setTimeout(() => {
+setAutomatedTimeout(() => {
 	arduino.getSensorsData((responseData) => {
 		sensorsData = responseData;
 		console.log(sensorsData);
 	});
-}, 5000);
+});
 
-setTimeout(() => {
+setAutomatedTimeout(() => {
 	arduino.pumpWater((responseData) => {
 		pumpWaterFinishedNoti = responseData;
 		console.log(pumpWaterFinishedNoti);
 	});
-}, 20000);
+});
 
 app.use(express.json());
 app.use("/api/sensors", sensor);
