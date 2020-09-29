@@ -32,7 +32,7 @@ const outputSensorsData = (data) => {
   document.querySelector("#container").appendChild(div);
 };
 
-const outputPumpData = () => {
+const outputPumpData = (data) => {
   const div = document.createElement("div");
   div.classList.add("pump");
   div.innerHTML = `
