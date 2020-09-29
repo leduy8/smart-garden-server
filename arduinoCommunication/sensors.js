@@ -20,7 +20,7 @@ const arduino = new Arduino("/dev/ttyACM0");
 // 	});
 // });
 
-module.exports = function (io) {
+module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
     socket.on("getSensorsData", () => {
       setAutomatedTimeout(() => {
@@ -28,11 +28,18 @@ module.exports = function (io) {
           socket.emit("returnSensorsData", responseData);
         });
       });
-      // socket.emit("returnSensorsData", {
-      //   temperature: 26,
-      //   humidity: 70,
-      //   soilMoisture: 69.6,
-      // });
+    });
+  });
+};
+
+module.exports.pumpWater = function (io) {
+  io.on("connect", (socket) => {
+    socket.on("pumpWaterRequest", () => {
+      setAutomatedTimeout(() => {
+        arduino.pumpWater((responseData) => {
+          socket.emit("pumpWaterResponse", responseData);
+        });
+      });
     });
   });
 };
