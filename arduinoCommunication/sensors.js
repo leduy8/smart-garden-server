@@ -1,6 +1,6 @@
 // Arduino communication
 const { Arduino } = require("../models/arduino");
-const { setAutomatedTimeout } = require("./utils/automatedTimeout");
+const { setAutomatedTimeout } = require("../utils/automatedTimeout");
 const arduino = new Arduino("/dev/ttyACM0");
 
 // let sensorsData = null;
