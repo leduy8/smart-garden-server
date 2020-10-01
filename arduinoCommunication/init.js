@@ -1,8 +1,9 @@
+const { Arduino } = require("../models/arduino");
+
 module.exports.ArduinoCommunication = (function () {
   let arduino;
 
   function init() {
-    const { Arduino } = require("../models/arduino");
     arduino = new Arduino("/dev/ttyACM0");
   }
 
