@@ -4,8 +4,7 @@ module.exports.ArduinoCommunication = (function () {
   let arduino;
 
   function init() {
-    arduino = new Arduino("/dev/ttyACM0");
-    console.log(arduino);
+    return new Arduino("/dev/ttyACM0");
   }
 
   return {
