@@ -2,8 +2,6 @@ const { setAutomatedTimeout } = require("../utils/automatedTimeout");
 const { ArduinoCommunication } = require("./init");
 
 const arduino = ArduinoCommunication.getInstance();
-const arduino2 = ArduinoCommunication.getInstance();
-console.log(arduino === arduino2);
 
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
