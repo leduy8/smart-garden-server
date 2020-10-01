@@ -1,5 +1,5 @@
 const { setAutomatedTimeout } = require("../utils/automatedTimeout");
-const ArduinoCommunication = require("./init");
+const { ArduinoCommunication } = require("./init");
 
 const arduino = ArduinoCommunication.getInstance();
 
