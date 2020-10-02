@@ -15,8 +15,8 @@ const pumpButton = document
   .addEventListener("click", (e) => {
     e.preventDefault();
     socket.emit("pumpWaterRequest");
-    socket.once("pumpWaterResponse", (data) => {
-      outputPumpData(data);
+    socket.once("pumpWaterResponse", (response) => {
+      outputPumpData(response.data);
     });
   });
 

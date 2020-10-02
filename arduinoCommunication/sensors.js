@@ -1,6 +1,5 @@
 const axios = require("axios");
-const { response } = require("express");
-//const { setAutomatedTimeout } = require("../utils/automatedTimeout");
+const { setAutomatedTimeout } = require("../utils/automatedTimeout");
 //const { ArduinoCommunication } = require("./init");
 
 //const arduino = ArduinoCommunication.getInstance();
@@ -18,9 +17,14 @@ module.exports.getSensorsData = function (io) {
       //   humidity: 60,
       //   soilMoisture: 69,
       // });
+
       axios
         .get("http://localhost:3001/api/sensors")
-        .then((response) => socket.emit("returnSensorsData", response.data))
+        .then((response) =>
+          setAutomatedTimeout(() =>
+            socket.emit("returnSensorsData", response.data)
+          )
+        )
         .catch((err) => console.log(err));
     });
   });
@@ -37,7 +41,11 @@ module.exports.pumpWater = function (io) {
       // socket.emit("pumpWaterResponse", { message: "Done pumping!" });
       axios
         .get("http://localhost:3001/api/pumpWater")
-        .then((response) => socket.emit("pumpWaterResponse", response.data))
+        .then((response) =>
+          setAutomatedTimeout(() =>
+            socket.emit("pumpWaterResponse", response.data)
+          )
+        )
         .catch((err) => console.log(err));
     });
   });
