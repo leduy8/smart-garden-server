@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "chromedriver": "^85.0.1",
     "cors": "^2.8.5",
     "eslint-plugin-jest": "^24.0.2",
