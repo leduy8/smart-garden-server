@@ -5,8 +5,8 @@ const sensorButton = document
   .addEventListener("click", (e) => {
     e.preventDefault();
     socket.emit("getSensorsData");
-    socket.once("returnSensorsData", (data) => {
-      outputSensorsData(data);
+    socket.once("returnSensorsData", (response) => {
+      outputSensorsData(response.data);
     });
   });
 
