@@ -19,8 +19,12 @@ module.exports.getSensorsData = function (io) {
       // });
       axios
         .get("http://localhost:3001/api/sensors")
-        .then((response) => response.json())
-        .then((data) => socket.emit("returnSensorsData", data))
+        .then((response) => {
+          //response.json()
+          console.log(response);
+          console.log(typeof response);
+        })
+        // .then((data) => socket.emit("returnSensorsData", data))
         .catch((error) => console.log(error));
     });
   });
