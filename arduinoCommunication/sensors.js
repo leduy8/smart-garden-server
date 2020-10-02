@@ -1,8 +1,8 @@
 const axios = require("axios");
-const { setAutomatedTimeout } = require("../utils/automatedTimeout");
-const { ArduinoCommunication } = require("./init");
+//const { setAutomatedTimeout } = require("../utils/automatedTimeout");
+//const { ArduinoCommunication } = require("./init");
 
-const arduino = ArduinoCommunication.getInstance();
+//const arduino = ArduinoCommunication.getInstance();
 
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
@@ -29,11 +29,11 @@ module.exports.getSensorsData = function (io) {
 module.exports.pumpWater = function (io) {
   io.on("connect", (socket) => {
     socket.on("pumpWaterRequest", () => {
-      setAutomatedTimeout(() => {
-        arduino.pumpWater((responseData) => {
-          socket.emit("pumpWaterResponse", responseData);
-        });
-      });
+      // setAutomatedTimeout(() => {
+      //   arduino.pumpWater((responseData) => {
+      //     socket.emit("pumpWaterResponse", responseData);
+      //   });
+      // });
       // socket.emit("pumpWaterResponse", { message: "Done pumping!" });
     });
   });
