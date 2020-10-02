@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { response } = require("express");
 //const { setAutomatedTimeout } = require("../utils/automatedTimeout");
 //const { ArduinoCommunication } = require("./init");
 
@@ -20,7 +21,7 @@ module.exports.getSensorsData = function (io) {
       axios
         .get("http://localhost:3001/api/sensors")
         .then((response) => socket.emit("returnSensorsData", response.data))
-        .catch((error) => console.log(error));
+        .catch((err) => console.log(err));
     });
   });
 };
@@ -34,6 +35,10 @@ module.exports.pumpWater = function (io) {
       //   });
       // });
       // socket.emit("pumpWaterResponse", { message: "Done pumping!" });
+      axios
+        .get("http://localhost:3001/api/pumpWater")
+        .then((response) => socket.emit("pumpWaterResponse", response.data))
+        .catch((err) => console.log(err));
     });
   });
 };
