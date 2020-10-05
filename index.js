@@ -9,13 +9,13 @@ require("./startup/cors")(app);
 //require("./startup/withPublicDir")(app);
 
 require("./arduinoCommunication/sensors").getSensorsData(io);
-require("./arduinoCommunication/sensors").pumpWater(io);
+//require("./arduinoCommunication/sensors").pumpWater(io);
 
 //require("./tests/sensorTest")();
 
 const port = process.env.PORT || 3000;
 const expressServer = server.listen(port, () =>
-	console.log(`Connected to port ${port}...`)
+  console.log(`Connected to port ${port}...`)
 );
 
 module.exports = expressServer;
