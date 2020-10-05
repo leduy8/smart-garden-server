@@ -3,7 +3,7 @@ const { setAutomatedTimeout } = require("./../utils/automatedTimeout");
 
 module.exports.getSensorsData = function (io) {
 	io.on("connect", (socket) => {
-		socket.once("getSensorsData", () => {
+		socket.on("getSensorsData", () => {
 			setAutomatedTimeout(() =>
 				axios
 					.get("http://localhost:3001/api/sensors")
@@ -16,7 +16,7 @@ module.exports.getSensorsData = function (io) {
 
 module.exports.pumpWater = function (io) {
 	io.on("connect", (socket) => {
-		socket.once("pumpWaterRequest", () => {
+		socket.on("pumpWaterRequest", () => {
 			setAutomatedTimeout(() =>
 				axios
 					.get("http://localhost:3001/api/pumpWater")
