@@ -4,12 +4,11 @@ const { setAutomatedTimeout } = require("./../utils/automatedTimeout");
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
     socket.on("getSensorsData", () => {
-      setAutomatedTimeout(
-        async () =>
-          await axios
-            .get("http://localhost:3001/api/sensors")
-            .then((response) => socket.emit("returnSensorsData", response.data))
-            .catch((err) => console.log(err))
+      setAutomatedTimeout(() =>
+        axios
+          .get("http://localhost:3001/api/sensors")
+          .then((response) => socket.emit("returnSensorsData", response.data))
+          .catch((err) => console.log(err))
       );
     });
   });

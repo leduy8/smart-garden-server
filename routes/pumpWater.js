@@ -11,12 +11,11 @@ router.get("/", (req, res) => {
     prompt: "pumpWaterResponse",
   };
 
-  setAutomatedTimeout(
-    async () =>
-      await axios
-        .get("http://localhost:3001/api/pumpWater")
-        .then((respone) => res.send(respone))
-        .catch((err) => res.send(errMsg))
+  setAutomatedTimeout(() =>
+    axios
+      .get("http://localhost:3001/api/pumpWater")
+      .then((respone) => res.send(respone))
+      .catch((err) => res.send(errMsg))
   );
 });
 
