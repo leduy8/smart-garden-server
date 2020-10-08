@@ -14,15 +14,15 @@ module.exports.getSensorsData = function (io) {
   });
 };
 
-// module.exports.pumpWater = function (io) {
-// 	io.on("connect", (socket) => {
-// 		socket.on("pumpWaterRequest", () => {
-// 			setAutomatedTimeout(() =>
-// 				axios
-// 					.get("http://localhost:3001/api/pumpWater")
-// 					.then((response) => socket.emit("pumpWaterResponse", response.data))
-// 					.catch((err) => console.log(err))
-// 			);
-// 		});
-// 	});
-// };
+module.exports.pumpWater = function (io) {
+  io.on("connect", (socket) => {
+    socket.on("pumpWaterRequest", () => {
+      setAutomatedTimeout(() =>
+        axios
+          .get("http://localhost:3001/api/pumpWater")
+          .then((response) => socket.emit("pumpWaterResponse", response.data))
+          .catch((err) => console.log(err))
+      );
+    });
+  });
+};

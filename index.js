@@ -6,10 +6,10 @@ const io = require("socket.io")(server);
 require("./startup/routes")(app);
 require("./startup/db")();
 require("./startup/cors")(app);
-//require("./startup/withPublicDir")(app);
+require("./startup/withPublicDir")(app);
 
 require("./arduinoCommunication/sensors").getSensorsData(io);
-//require("./arduinoCommunication/sensors").pumpWater(io);
+require("./arduinoCommunication/sensors").pumpWater(io);
 
 //require("./tests/sensorTest")();
 
