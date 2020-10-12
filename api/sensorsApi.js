@@ -10,8 +10,8 @@ module.exports.getSensorsData = function (callback) {
   );
 };
 
-module.exports.pumpWater = function () {
-  setAutomatedTimeout((callback) =>
+module.exports.pumpWater = function (callback) {
+  setAutomatedTimeout(() =>
     axios
       .get("http://localhost:3001/api/pumpWater")
       .then((response) => callback(response))
