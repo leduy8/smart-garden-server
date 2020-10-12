@@ -3,8 +3,9 @@ const api = require("../api/sensorsApi");
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
     socket.on("getSensorsData", () => {
-      api.getSensorsData((response) =>
-        socket.emit("returnSensorsData", response.data)
+      api.getSensorsData(
+        (response) => socket.emit("returnSensorsData", response.data),
+        (err) => console.log(err)
       );
     });
   });
@@ -13,8 +14,9 @@ module.exports.getSensorsData = function (io) {
 module.exports.pumpWater = function (io) {
   io.on("connect", (socket) => {
     socket.on("pumpWaterRequest", () => {
-      api.pumpWater((response) =>
-        socket.emit("pumpWaterResponse", response.data)
+      api.pumpWater(
+        (response) => socket.emit("pumpWaterResponse", response.data),
+        (err) => console.log(err)
       );
     });
   });
