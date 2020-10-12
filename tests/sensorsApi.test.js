@@ -3,7 +3,7 @@ const { getSensorsData, pumpWater } = require("../api/sensorsApi");
 
 describe("arduino communication service api", () => {
   describe("GET /api/sensors", () => {
-    it("should have all 3 properties", async () => {
+    it("should have all 3 properties of sensors data", async () => {
       getSensorsData(
         (response) => {
           expect(response.data).toHaveProperty("temperature");
@@ -16,7 +16,7 @@ describe("arduino communication service api", () => {
   });
 
   describe("GET /api/pumpWater", () => {
-    it("should have all 3 properties", async () => {
+    it("should have message property", async () => {
       pumpWater(
         (response) => {
           expect(response.data).toHaveProperty("message");
