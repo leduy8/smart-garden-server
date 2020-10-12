@@ -1,4 +1,3 @@
-const { response } = require("express");
 const { getSensorsData, pumpWater } = require("../api/sensorsApi");
 
 describe("arduino communication service api", () => {
