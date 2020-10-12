@@ -1,14 +1,10 @@
-const axios = require("axios");
-const { setAutomatedTimeout } = require("./../utils/automatedTimeout");
+const api = require("../api/sensorsApi");
 
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
     socket.on("getSensorsData", () => {
-      setAutomatedTimeout(() =>
-        axios
-          .get("http://localhost:3001/api/sensors")
-          .then((response) => socket.emit("returnSensorsData", response.data))
-          .catch((err) => console.log(err))
+      api.getSensorsData((response) =>
+        socket.emit("returnSensorsData", response.data)
       );
       //* For testing only
       // socket.emit("returnSensorsData", {
@@ -26,11 +22,8 @@ module.exports.getSensorsData = function (io) {
 module.exports.pumpWater = function (io) {
   io.on("connect", (socket) => {
     socket.on("pumpWaterRequest", () => {
-      setAutomatedTimeout(() =>
-        axios
-          .get("http://localhost:3001/api/pumpWater")
-          .then((response) => socket.emit("pumpWaterResponse", response.data))
-          .catch((err) => console.log(err))
+      api.pumpWater((response) =>
+        socket.emit("pumpWaterResponse", response.data)
       );
       //* For testing only
       // socket.emit("pumpWaterResponse", {
