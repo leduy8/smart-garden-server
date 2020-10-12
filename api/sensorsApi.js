@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { setAutomatedTimeout } = require("./../utils/automatedTimeout");
 
-module.exports.getSensorsData = function (callback) {
+module.exports.getSensorsData = function (callback, error) {
   setAutomatedTimeout(() =>
     axios
       .get("http://localhost:3001/api/sensors")
