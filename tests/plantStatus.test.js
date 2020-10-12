@@ -2,7 +2,7 @@ const request = require("supertest");
 const { PlantStatus } = require("../models/plantStatus");
 let server;
 
-describe("/api/sensor", () => {
+describe("/api/plantStatus", () => {
   beforeEach(() => {
     server = require("../index");
   });
