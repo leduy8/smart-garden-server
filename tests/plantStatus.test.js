@@ -20,6 +20,7 @@ describe("/api/plantStatus", () => {
         healthStatus: "Good",
         imgURL: "imgURL",
         timestamp: "123456",
+        waterFlow: 1.2,
       });
 
       const res = await request(server).get("/api/plantStatus");
@@ -35,6 +36,7 @@ describe("/api/plantStatus", () => {
     let healthStatus;
     let imgURL;
     let timestamp;
+    let waterFlow;
 
     const exec = async () => {
       return await request(server).post("/api/plantStatus").send({
@@ -44,6 +46,7 @@ describe("/api/plantStatus", () => {
         healthStatus,
         imgURL,
         timestamp,
+        waterFlow,
       });
     };
 
@@ -54,9 +57,10 @@ describe("/api/plantStatus", () => {
       healthStatus = "Good";
       imgURL = "imgURL";
       timestamp = new Date().getTime().toString();
+      waterFlow = 1.2;
     });
 
-    it("should return 400 if temperature less than -50", async () => {
+    it("should return 400 if temperature is less than -50", async () => {
       temperature = -51;
 
       const res = await exec();
@@ -64,7 +68,7 @@ describe("/api/plantStatus", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 400 if temperature greater than 60", async () => {
+    it("should return 400 if temperature is greater than 60", async () => {
       temperature = 61;
 
       const res = await exec();
@@ -80,7 +84,7 @@ describe("/api/plantStatus", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 400 if airHumidity less than 0", async () => {
+    it("should return 400 if airHumidity is less than 0", async () => {
       airHumidity = -1;
 
       const res = await exec();
@@ -88,7 +92,7 @@ describe("/api/plantStatus", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 400 if airHumidity greater than 100", async () => {
+    it("should return 400 if airHumidity is greater than 100", async () => {
       airHumidity = 101;
 
       const res = await exec();
@@ -104,7 +108,7 @@ describe("/api/plantStatus", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 400 if soilMoisture less than 0", async () => {
+    it("should return 400 if soilMoisture is less than 0", async () => {
       soilMoisture = -1;
 
       const res = await exec();
@@ -112,7 +116,7 @@ describe("/api/plantStatus", () => {
       expect(res.status).toBe(400);
     });
 
-    it("should return 400 if soilMoisture greater than 100", async () => {
+    it("should return 400 if soilMoisture is greater than 100", async () => {
       soilMoisture = 101;
 
       const res = await exec();
@@ -146,6 +150,22 @@ describe("/api/plantStatus", () => {
 
     it("should return 400 if timestamp is null", async () => {
       timestamp = null;
+
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+    });
+
+    it("should return 400 if waterFlow is less than 0", async () => {
+      waterFlow = -1;
+
+      const res = await exec();
+
+      expect(res.status).toBe(400);
+    });
+
+    it("should return 400 if waterFlow is null", async () => {
+      waterFlow = null;
 
       const res = await exec();
 

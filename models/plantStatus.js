@@ -8,6 +8,7 @@ const plantStatusSchema = new mongoose.Schema({
   healthStatus: { type: String, required: true },
   imgURL: { type: String, required: true },
   timestamp: { type: String, required: true },
+  waterFlow: { type: Number, min: 0, required: true },
 });
 
 const PlantStatus = mongoose.model("plant status", plantStatusSchema);
@@ -20,6 +21,7 @@ function validatePlantStatus(plantStatus) {
     healthStatus: Joi.string().required(),
     imgURL: Joi.string().required(),
     timestamp: Joi.string().required(),
+    waterFlow: Joi.number().min(0).required(),
   });
 
   return schema.validate(plantStatus);

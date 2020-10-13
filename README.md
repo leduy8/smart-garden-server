@@ -1,1 +1,1 @@
-Smart Garden Server version 0.0.3
+Smart Garden Server version 1.0.4
