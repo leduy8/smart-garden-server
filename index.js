@@ -8,8 +8,8 @@ require("./startup/db")();
 require("./startup/cors")(app);
 require("./startup/withPublicDir")(app);
 
-require("./arduinoCommunication/sensors").getSensorsData(io);
-require("./arduinoCommunication/sensors").pumpWater(io);
+require("./gpioCommunication/sensors").getSensorsData(io);
+require("./gpioCommunication/sensors").pumpWater(io);
 
 //require("./tests/sensorTest")();
 
