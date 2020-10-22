@@ -1,4 +1,7 @@
 const axios = require("axios");
+let firstCall = true;
+let flag;
+let mode;
 
 module.exports.getSensorsData = function (callback, error) {
   axios
@@ -9,10 +12,6 @@ module.exports.getSensorsData = function (callback, error) {
 
 module.exports.pumpWater = function (callback, error) {
   //* Flag will be true at startup
-  let flag;
-  let mode;
-  let firstCall = true;
-
   if (firstCall) {
     flag = true;
     firstCall = !firstCall;
@@ -24,8 +23,10 @@ module.exports.pumpWater = function (callback, error) {
   axios
     .get(`http://localhost:3001/api/pumpWater?mode=${mode}`)
     .then((response) => {
-      callback(response);
       flag = !flag;
+      callback(response);
     })
     .catch((err) => error(err));
+
+  console.log(flag);
 };
