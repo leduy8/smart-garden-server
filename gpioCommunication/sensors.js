@@ -2,12 +2,10 @@ const api = require("../api/sensorsApi");
 
 module.exports.getSensorsData = function (io) {
   io.on("connect", (socket) => {
-    setInterval(() => {
-      api.getSensorsData(
-        (response) => socket.emit("returnSensorsData", response.data),
-        (err) => console.log(err)
-      );
-    }, 2000);
+    api.getSensorsData(
+      (response) => socket.emit("returnSensorsData", response.data),
+      (err) => console.log(err)
+    );
   });
 };
 

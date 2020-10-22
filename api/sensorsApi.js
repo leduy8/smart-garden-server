@@ -27,6 +27,4 @@ module.exports.pumpWater = function (callback, error) {
       callback(response);
     })
     .catch((err) => error(err));
-
-  console.log(flag);
 };
